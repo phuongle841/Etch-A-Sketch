@@ -1,0 +1,25 @@
+body{
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    align-items: center;
+}
+.bigDiv {
+    width: fit-content;
+    height: fit-content;
+    display: flex;
+    justify-content: center;
+    gap: 1px;
+}
+.smallDiv {
+  border: 1px solid #333;
+  width: 25px;
+  height: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.smallDiv:hover{
+    background-color: #000;
+}
