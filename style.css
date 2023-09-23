@@ -1,14 +1,56 @@
 body {
   display: flex;
+  justify-content: space-evenly;
   gap: 1px;
 }
-body div {
-  flex: 1;
-}
 .board {
+  width: fit-content;
   display: flex;
   flex-direction: column;
   gap: 1px;
+  padding: 2px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+.setting {
+  width: 200px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  border-radius: 10px;
+}
+.setting h3 {
+  text-align: center;
+  color: #000;
+  font-family: "Signika", sans-serif;
+}
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  flex-direction: column;
+  height: 50%;
+}
+.button button {
+  border: none;
+  background-color: transparent;
+  box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px,
+    rgba(6, 24, 44, 0.65) 0px 4px 6px -1px,
+    rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
+  border-radius: 4px;
+  width: 50%;
+  height: 18%;
+}
+button:hover{
+  background-color: #000;
+  color: #fff;
+  transform: scale(1.1);
+}
+input{
+  
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
 }
 .bigDiv {
   width: fit-content;
