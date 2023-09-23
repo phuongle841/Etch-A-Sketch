@@ -1,15 +1,21 @@
-body{
-    display: flex;
-    flex-direction: column;
-    gap: 1px;
-    align-items: center;
+body {
+  display: flex;
+  gap: 1px;
+}
+body div {
+  flex: 1;
+}
+.board {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
 }
 .bigDiv {
-    width: fit-content;
-    height: fit-content;
-    display: flex;
-    justify-content: center;
-    gap: 1px;
+  width: fit-content;
+  height: fit-content;
+  display: flex;
+  justify-content: center;
+  gap: 1px;
 }
 .smallDiv {
   border: 1px solid #333;
@@ -20,6 +26,6 @@ body{
   justify-content: center;
 }
 
-.smallDiv:hover{
-    background-color: #000;
+.smallDiv.hover {
+  background-color: #000;
 }

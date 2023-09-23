@@ -1,19 +1,31 @@
 const body = document.querySelector("body");
-
+const board = document.querySelector(".board");
+console.log(board);
 const bigDivArray = [];
-for (let i = 0; i < 16; i++) {
+const smallDivArray = [];
+numberOfBox = 15;
+for (let i = 0; i < numberOfBox; i++) {
   let bigDiv = document.createElement("div");
   bigDiv.classList.add("bigDiv");
   bigDivArray.push(bigDiv);
 }
 bigDivArray.forEach((bigDiv) => {
-  body.appendChild(bigDiv);
+  board.appendChild(bigDiv);
 });
 bigDivArray.forEach((bigDiv) => {
-  for (let j = 0; j < 16; j++) {
+  for (let j = 0; j < numberOfBox; j++) {
     let div = document.createElement("div");
     div.classList.add("smallDiv");
-    div.textContent = (j+1)%10;
     bigDiv.appendChild(div);
+    smallDivArray.push(div);
   }
+});
+function paintSmallDiv() {
+  e.target.classList.add("hover");
+}
+
+smallDivArray.forEach((smallDiv) => {
+  smallDiv.addEventListener("mouseover", (event) => {
+    smallDiv.classList.add("hover");
+  });
 });
