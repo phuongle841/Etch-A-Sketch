@@ -54,7 +54,7 @@ body {
   flex-direction: column;
   height: 50%;
 }
-.button button {
+button {
   border: none;
   background-color: transparent;
   box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px,

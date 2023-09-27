@@ -1,7 +1,9 @@
 const body = document.querySelector("body");
 const board = document.querySelector(".board");
+const eraseButton = document.querySelector("#eraseButton");
+const Input = document.querySelector("#input"); // user input
 
-let numberOfBox ;
+let numberOfBox;
 const smallDivArray = [];
 const bigDivArray = [];
 let currentWidth = board.offsetWidth;
@@ -69,13 +71,31 @@ function addPaintEffect() {
 }
 
 function ReWorkBoard(numberOfBox) {
+  eraseBoard();
   SetNumberOfBox(numberOfBox);
   setLine(numberOfBox);
   setRow(numberOfBox);
   addPaintEffect();
 }
+
+function whitenBoard() {
+  smallDivArray.forEach((smallDiv) => {
+    smallDiv.classList.remove("hover");
+  });
+}
+
+Input.addEventListener("change", () => {
+  let boxes = Input.value;
+  if (isNaN(Input.value)) {
+    // this will never happen since input box only input number
+  } else {
+    ReWorkBoard(boxes);
+  }
+});
+
 let mouseDown = false;
 document.body.onmousedown = () => (mouseDown = true);
 document.body.onmouseup = () => (mouseDown = false);
+eraseButton.addEventListener("click", whitenBoard);
 
-ReWorkBoard(4);
+ReWorkBoard(20);
