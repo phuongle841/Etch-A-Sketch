@@ -2,10 +2,12 @@ const body = document.querySelector("body");
 const board = document.querySelector(".board");
 const eraseButton = document.querySelector("#eraseButton");
 const Input = document.querySelector("#input"); // user input
+const rainbowButton = document.querySelector("#randomButton");
 
 let numberOfBox;
 const smallDivArray = [];
 const bigDivArray = [];
+let rainbowState = false;
 let currentWidth = board.offsetWidth;
 let currentHeight = board.offsetHeight;
 
@@ -64,10 +66,29 @@ function changeColor(e) {
   e.target.classList.add("hover");
 }
 
+function paintRandom(e) {
+  if (e.type === "mouseover" && !mouseDown) return;
+  e.target.style.backgroundColor = `${getRandomColor()}`;
+}
+
 function addPaintEffect() {
   smallDivArray.forEach((smallDiv) => {
     smallDiv.addEventListener("mouseover", changeColor);
   });
+}
+function addRandomColor() {
+  smallDivArray.forEach((smallDiv) => {
+    smallDiv.addEventListener("mouseover", paintRandom);
+  });
+}
+
+function getRandomColor() {
+  var letters = "0123456789ABCDEF";
+  var color = "#";
+  for (var i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)];
+  }
+  return color;
 }
 
 function ReWorkBoard(numberOfBox) {
@@ -75,7 +96,11 @@ function ReWorkBoard(numberOfBox) {
   SetNumberOfBox(numberOfBox);
   setLine(numberOfBox);
   setRow(numberOfBox);
-  addPaintEffect();
+  if (rainbowState) {
+    addRandomColor();
+  } else {
+    addPaintEffect;
+  }
 }
 
 function whitenBoard() {
@@ -83,19 +108,36 @@ function whitenBoard() {
     smallDiv.classList.remove("hover");
   });
 }
-
+function whitenRandom() {
+  smallDivArray.forEach((smallDiv) => {
+    smallDiv.style.backgroundColor = "white";
+  });
+}
 Input.addEventListener("change", () => {
   let boxes = Input.value;
-  if (isNaN(Input.value)) {
+  Input.value = "";
+  Input.focus();
+  if (Input.value > 64 || Input.value <= 2) {
     // this will never happen since input box only input number
   } else {
     ReWorkBoard(boxes);
   }
 });
-
+function changeRainbowState() {
+  if (rainbowState == true) {
+    rainbowState = false;
+  } else {
+    rainbowState = true;
+  }
+  ReWorkBoard();
+}
 let mouseDown = false;
 document.body.onmousedown = () => (mouseDown = true);
 document.body.onmouseup = () => (mouseDown = false);
-eraseButton.addEventListener("click", whitenBoard);
-
+eraseButton.addEventListener(
+  "click",
+  !rainbowState ? whitenBoard : whitenRandom
+);
+rainbowButton.addEventListener("click", changeRainbowState);
+console.log(rainbowButton);
 ReWorkBoard(20);
