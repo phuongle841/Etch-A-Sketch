@@ -3,8 +3,8 @@ const board = document.querySelector(".board");
 const eraseButton = document.querySelector("#eraseButton");
 const Input = document.querySelector("#input"); // user input
 const rainbowButton = document.querySelector("#randomButton");
+const specialPaintButton = document.querySelector(`#specialPaint`);
 const displayNumberOfBox = document.querySelector(`#displayNumberOfBox`);
-console.log(displayNumberOfBox.textContent);
 
 let numberOfBox;
 const smallDivArray = [];
@@ -77,6 +77,11 @@ function paintRandom(e) {
   e.target.style.backgroundColor = `${getRandomColor()}`;
 }
 
+function specifyPaint(e) {
+  console.log(e);
+  // e.style.backgroundColor = `#000`;
+}
+
 function addPaintEffect() {
   smallDivArray.forEach((smallDiv) => {
     smallDiv.addEventListener("mouseover", paintColor);
@@ -137,10 +142,28 @@ function changeRainbowState() {
   ReWorkBoard(numberOfBox);
 }
 
+function specialDraw() {
+  for (let i = 0; i < smallDivArray.length; i++) {
+    if ((i + 1) % 10 == 0 || (i + 1) % 11 == 0) {
+      // chose small box
+      smallDivArray[i].style.backgroundColor = `black`;
+    }
+  }
+}
+function addNumber() {
+  let i = 1;
+  smallDivArray.forEach((smallDiv) => {
+    // smallDiv.textContent = `${i}`;
+    i++;
+  });
+}
 let mouseDown = false;
 document.body.onmousedown = () => (mouseDown = true);
 document.body.onmouseup = () => (mouseDown = false);
 
 eraseButton.addEventListener("click", whitenBoard);
 rainbowButton.addEventListener("click", changeRainbowState);
+specialPaintButton.addEventListener("click", specialDraw);
+specialPaintButton.addEventListener("click", addNumber);
+
 ReWorkBoard(20);
