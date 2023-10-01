@@ -61,9 +61,9 @@ function eraseBoard() {
   board.innerHTML = "";
 }
 
-function changeColor(e) {
+function paintColor(e) {
   if (e.type === "mouseover" && !mouseDown) return;
-  e.target.classList.add("hover");
+  e.target.style.backgroundColor = `#000`;
 }
 
 function paintRandom(e) {
@@ -73,7 +73,7 @@ function paintRandom(e) {
 
 function addPaintEffect() {
   smallDivArray.forEach((smallDiv) => {
-    smallDiv.addEventListener("mouseover", changeColor);
+    smallDiv.addEventListener("mouseover", paintColor);
   });
 }
 function addRandomColor() {
@@ -99,16 +99,11 @@ function ReWorkBoard(numberOfBox) {
   if (rainbowState) {
     addRandomColor();
   } else {
-    addPaintEffect;
+    addPaintEffect();
   }
 }
 
 function whitenBoard() {
-  smallDivArray.forEach((smallDiv) => {
-    smallDiv.classList.remove("hover");
-  });
-}
-function whitenRandom() {
   smallDivArray.forEach((smallDiv) => {
     smallDiv.style.backgroundColor = "white";
   });
@@ -123,21 +118,20 @@ Input.addEventListener("change", () => {
     ReWorkBoard(boxes);
   }
 });
+
 function changeRainbowState() {
   if (rainbowState == true) {
     rainbowState = false;
   } else {
     rainbowState = true;
   }
-  ReWorkBoard();
+  ReWorkBoard(numberOfBox);
 }
+
 let mouseDown = false;
 document.body.onmousedown = () => (mouseDown = true);
 document.body.onmouseup = () => (mouseDown = false);
-eraseButton.addEventListener(
-  "click",
-  !rainbowState ? whitenBoard : whitenRandom
-);
+
+eraseButton.addEventListener("click", whitenBoard);
 rainbowButton.addEventListener("click", changeRainbowState);
-console.log(rainbowButton);
 ReWorkBoard(20);
