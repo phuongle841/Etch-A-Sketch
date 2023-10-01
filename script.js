@@ -3,6 +3,8 @@ const board = document.querySelector(".board");
 const eraseButton = document.querySelector("#eraseButton");
 const Input = document.querySelector("#input"); // user input
 const rainbowButton = document.querySelector("#randomButton");
+const displayNumberOfBox = document.querySelector(`#displayNumberOfBox`);
+console.log(displayNumberOfBox.textContent);
 
 let numberOfBox;
 const smallDivArray = [];
@@ -16,7 +18,7 @@ function getLineHeight() {
   return currentLineHeight;
 }
 
-function SetNumberOfBox(boxes) {
+function setNumberOfBox(boxes) {
   numberOfBox = boxes;
 }
 
@@ -57,6 +59,10 @@ function setRow(numberOfBox) {
   });
 }
 
+function setDisplayNumberOfBox() {
+  displayNumberOfBox.textContent = `number of boxes: ${numberOfBox}`;
+}
+
 function eraseBoard() {
   board.innerHTML = "";
 }
@@ -93,7 +99,8 @@ function getRandomColor() {
 
 function ReWorkBoard(numberOfBox) {
   eraseBoard();
-  SetNumberOfBox(numberOfBox);
+  setNumberOfBox(numberOfBox);
+  setDisplayNumberOfBox();
   setLine(numberOfBox);
   setRow(numberOfBox);
   if (rainbowState) {
@@ -112,7 +119,7 @@ Input.addEventListener("change", () => {
   let boxes = Input.value;
   Input.value = "";
   Input.focus();
-  if (Input.value > 64 || Input.value <= 2) {
+  if (boxes > 64 || boxes <= 2) {
     // this will never happen since input box only input number
   } else {
     ReWorkBoard(boxes);
@@ -122,8 +129,10 @@ Input.addEventListener("change", () => {
 function changeRainbowState() {
   if (rainbowState == true) {
     rainbowState = false;
+    rainbowButton.classList.remove("hover");
   } else {
     rainbowState = true;
+    rainbowButton.classList.add("hover");
   }
   ReWorkBoard(numberOfBox);
 }
